@@ -1,0 +1,46 @@
+#include <iostream>
+
+void intercambiar(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+void ordenarBurbuja(int arr[], int n, bool ascendente) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if ((ascendente && arr[j] > arr[j + 1]) || (!ascendente && arr[j] < arr[j + 1])) {
+                intercambiar(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    const int tamano = 10;
+    int arreglo[tamano];
+
+    // Ingresar valores al arreglo
+    std::cout << "Ingrese 10 valores enteros separados por espacio: ";
+    for (int i = 0; i < tamano; i++) {
+        std::cin >> arreglo[i];
+    }
+
+    // Elegir orden ascendente o descendente
+    char opcion;
+    std::cout << "Desea ordenar en orden ascendente (a) o descendente (d): ";
+    std::cin >> opcion;
+
+    bool ordenAscendente = (opcion == 'a' || opcion == 'A');
+
+    // Llamar a la función de ordenamiento
+    ordenarBurbuja(arreglo, tamano, ordenAscendente);
+
+    // Mostrar el arreglo ordenado
+    std::cout << "Arreglo ordenado: ";
+    for (int i = 0; i < tamano; i++) {
+        std::cout << arreglo[i] << " ";
+    }
+
+    return 0;
+}
