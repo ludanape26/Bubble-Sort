@@ -1,0 +1,50 @@
+#include <iostream>
+
+void ordenamientoInsercion(int arr[], int n, bool ascendente) {
+    for (int i = 1; i < n; ++i) {
+        int clave = arr[i];
+        int j = i - 1;
+
+        // Mover los elementos del arreglo que son mayores que la clave
+        // a una posición adelante de su posición actual
+        while (j >= 0 && ((ascendente && arr[j] > clave) || (!ascendente && arr[j] < clave))) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = clave;
+    }
+}
+
+void imprimirArreglo(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    const int tamano = 10;
+    int arr[tamano];
+
+    // Ingreso de valores
+    std::cout << "Ingrese 10 valores enteros separados por espacio: ";
+    for (int i = 0; i < tamano; ++i) {
+        std::cin >> arr[i];
+    }
+
+    // Selección del orden
+    char orden;
+    std::cout << "Ingrese 'a' para orden ascendente o 'd' para orden descendente: ";
+    std::cin >> orden;
+
+    bool ascendente = (orden == 'a');
+
+    // Llamada al método de inserción
+    ordenamientoInsercion(arr, tamano, ascendente);
+
+    // Impresión del arreglo ordenado
+    std::cout << "Arreglo ordenado en orden " << (ascendente ? "ascendente" : "descendente") << ": ";
+    imprimirArreglo(arr, tamano);
+
+    return 0;
+}
